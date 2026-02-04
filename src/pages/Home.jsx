@@ -1,5 +1,44 @@
 function Home() {
-  return <div className="font-jost">Home</div>;
+  return (
+    <div className="font-jost">
+      <div className="bg-[url('./assets/images/slide_02.jpg')] bg-secondary bg-center bg-cover lg:bg-contain bg-no-repeat flex items-center h-screen px-4 lg:px-40 ">
+        <div>
+          <h2 className="text-4xl font-bold">New Collection</h2>
+          <h1 className="text-6xl lg:text-7xl font-bold mb-2">
+            Luxury without <br /> Labels
+          </h1>
+          <p>Explore new-in products and best sellers</p>
+          <button className="bg-primary text-white px-8 py-2 mt-4">
+            View Collection
+          </button>
+        </div>
+      </div>
+      <div className="my-20 max-w-[90%] lg:max-w-5xl mx-auto ">
+        <h2 className="text-center text-3xl font-bold">Best Seller</h2>
+        <p className="text-center">Explore our best seller products</p>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+          <div className=" border border-gray-300  bg-gray-200 group">
+            <figure className="p-2 h-[160px] lg:h[200px] overflow-hidden">
+              <img
+                className="w-full h-full object-cover group-hover:scale-110 transition-all"
+                src="data:image/jpeg;base64,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"
+                alt="Product 1"
+                srcset=""
+              />
+            </figure>
+            <div className="py-2 px-2">
+              <h3>Product Name</h3>
+              <p>99.00</p>
+            </div>
+          </div>
+          <div className="bg-gray-200 "></div>
+          <div className="bg-gray-200 "></div>
+          <div className="bg-gray-200 "></div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Home;
