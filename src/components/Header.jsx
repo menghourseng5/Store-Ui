@@ -1,4 +1,12 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+
+const menus = [
+  { label: "Home", path: "/" },
+  { label: "Product", path: "/product" },
+  { label: "About", path: "/about" },
+  { label: "Contact", path: "/contact" },
+];
 
 function Header() {
   const [isActiveNavbar, setActiveNavbar] = useState(false);
@@ -31,11 +39,14 @@ function Header() {
 
         {/* Desktop Menu */}
         <ul className="hidden lg:flex items-center gap-6">
-          {["Home", "Products", "About", "Contact"].map((item) => (
-            <li key={item}>
-              <a href="#" className="hover:underline decoration-yellow-600">
-                {item}
-              </a>
+          {menus.map((item) => (
+            <li key={item.path}>
+              <Link
+                to={item.path}
+                className="hover:underline decoration-yellow-600"
+              >
+                {item.label}
+              </Link>
             </li>
           ))}
         </ul>
@@ -82,15 +93,15 @@ function Header() {
 
         {/* Mobile Links */}
         <nav className="flex flex-col mt-6 space-y-2">
-          {["Home", "Products", "About", "Contact"].map((item) => (
-            <a
-              key={item}
-              href="#"
+          {menus.map((item) => (
+            <Link
+              key={item.path}
+              to={item.path}
               onClick={() => setActiveNavbar(false)}
               className="px-3 py-2 rounded-lg hover:bg-gray-700 transition-all"
             >
-              {item}
-            </a>
+              {item.label}
+            </Link>
           ))}
         </nav>
       </div>
