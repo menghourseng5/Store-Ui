@@ -1,6 +1,10 @@
+import { Link } from "react-router-dom";
 function Card() {
   return (
-    <div className=" border border-gray-300  bg-gray-200 group">
+    <Link
+      to={`/product/23`}
+      className=" border border-gray-300  bg-gray-200 group"
+    >
       <figure className="p-2 h-[160px] lg:h[200px] overflow-hidden">
         <img
           className="w-full h-full object-cover group-hover:scale-110 transition-all"
@@ -13,7 +17,7 @@ function Card() {
         <h3 className="line-clamp-2">Product Name</h3>
         <p className="text-red-400">99.00</p>
       </div>
-    </div>
+    </Link>
   );
 }
 
