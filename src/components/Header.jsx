@@ -1,4 +1,13 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+
+// menu links used by both desktop navbar and mobile sidebar
+const menus = [
+  { label: "Home", path: "/" },
+  { label: "Product", path: "/product" },
+  { label: "Contact", path: "/contact" },
+  { label: "About", path: "/about" },
+];
 
 function Header() {
   const [isActiveNavbar, setActiveNavbar] = useState(false);
