@@ -1,12 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-
-const menus = [
-  { label: "Home", path: "/" },
-  { label: "Product", path: "/product" },
-  { label: "About", path: "/about" },
-  { label: "Contact", path: "/contact" },
-];
 
 function Header() {
   const [isActiveNavbar, setActiveNavbar] = useState(false);
