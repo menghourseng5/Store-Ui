@@ -1,5 +1,22 @@
+import { useEffect, useState } from "react";
 import Card from "../components/Card";
+import axios from "axios";
 function Home() {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://fakestoreapi.com/products?limit=8",
+        );
+        setData(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <div className="font-jost">
       <div className="bg-[url('./assets/images/slide_02.jpg')] bg-secondary bg-center bg-cover lg:bg-contain bg-no-repeat flex items-center h-screen px-4 lg:px-40 ">
@@ -19,10 +36,9 @@ function Home() {
         <p className="text-center">Explore our best seller products</p>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {data?.map((item) => (
+            <Card key={item.id} data={item} />
+          ))}
         </div>
         <div className="flex justify-center mt-4 ">
           <button

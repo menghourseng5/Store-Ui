@@ -8,8 +8,10 @@ function RootLayout() {
     <>
       <Topbar />
       <Header />
+      <main className="min-h-screen">
+        <Outlet />
+      </main>
 
-      <Outlet />
       <Footer />
     </>
   );
