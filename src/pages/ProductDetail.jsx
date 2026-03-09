@@ -1,9 +1,11 @@
 import { Link, useParams } from "react-router-dom";
 import useGetOneProduct from "../hooks/useGetOneProduct";
+import { useState } from "react";
 
 function ProductDetail() {
   const { id } = useParams();
   const { data, isLoading } = useGetOneProduct(id);
+  const [quantity, setQuantity] = useState(1);
 
   if (isLoading) {
     return (
@@ -13,11 +15,16 @@ function ProductDetail() {
     );
   }
 
+  const handleQuantity = (type) => {
+    if (type === "inc") setQuantity(quantity + 1);
+    if (type === "dec" && quantity > 1) setQuantity(quantity - 1);
+  };
+
   return (
     <div>
       {/* Breadcrumb */}
       <div className="bg-gray-100 w-full py-1 font-jost">
-        <div className="max-w-[90%] lg:max-w-5xl mx-auto flex items-center gap-1 text-sm">
+        <div className="max-w-[90%] lg:max-w-5xl mx-auto flex flex-wrap items-center gap-1 text-sm">
           <Link to="/">Home</Link>
           <span> / </span>
           <Link to="/product">Product</Link>
@@ -28,37 +35,44 @@ function ProductDetail() {
 
       {/* Product Details */}
       <div className="my-10 max-w-[90%] lg:max-w-5xl mx-auto">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Product Image */}
           <div className="p-1 border border-gray-300">
             <img
-              className="w-full h-full object-cover"
+              className="w-full h-auto object-cover"
               src={data.image}
               alt={data.title}
             />
           </div>
 
-          <div>
-            <h3 className="text-xl">{data.category}</h3>
-            <h1 className="text-2xl font-bold">{data.title}</h1>
-            <h1 className="text-lg font-semibold">${data.price}</h1>
+          {/* Product Info */}
+          <div className="flex flex-col">
+            <h3 className="text-lg sm:text-xl">{data.category}</h3>
+            <h1 className="text-2xl sm:text-3xl font-bold my-2">
+              {data.title}
+            </h1>
+            <h2 className="text-lg sm:text-xl font-semibold text-red-500 mb-4">
+              ${data.price}
+            </h2>
 
-            <div className="flex flex-col lg:flex-row items-start lg:items-center gap-4 my-8">
-              <div className="border border-gray-300 flex items-center gap-4 w-32 py-2 justify-evenly">
-                <button>-</button>
-                <button>1</button>
-                <button>+</button>
+            {/* Quantity & Actions */}
+            <div className="flex flex-col   sm:flex-row items-start sm:items-center gap-4 mb-6">
+              <div className="border border-gray-300 flex items-center gap-4 w-1/3 py-2 justify-evenly">
+                <button onClick={() => handleQuantity("dec")}>-</button>
+                <span>{quantity}</span>
+                <button onClick={() => handleQuantity("inc")}>+</button>
               </div>
 
-              <button className="bg-primary px-8 py-2 text-white">
+              <button className="bg-primary w-1/3 py-2 text-white rounded">
                 Add to cart
               </button>
-              <button className="bg-amber-400 px-8 py-2 text-white hover:bg-amber-500 transition-all">
+              <button className="bg-amber-400 w-1/3 py-2 text-white rounded hover:bg-amber-500 transition-all">
                 Pay now
               </button>
             </div>
 
             <hr />
-            <p className="mt-4">{data.description}</p>
+            <p className="mt-4 text-sm sm:text-base">{data.description}</p>
           </div>
         </div>
       </div>
